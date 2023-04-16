@@ -68,3 +68,20 @@
   padding: 1rem;
 
 }
+
+.details {
+  margin-top: 3rem;
+  margin-left: 3rem;
+}
+
+.card-form {
+  text-align: center;
+}
+
+.details-1 {
+  margin-top: 1rem;
+}
+
+.space {
+  margin-right: 0.5rem ;
+}
