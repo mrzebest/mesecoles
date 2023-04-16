@@ -1,13 +1,23 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
+import React, { useState, useEffect } from 'react';
+import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import '../App.css';
 
 
 function Ecole() {
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+      axios.get('http://localhost:8090/ecole')
+        .then(response => {
+          setData(response.data);
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }, []);
     const cards = [
       {
         id: 1,
@@ -36,18 +46,23 @@ function Ecole() {
         
 
        
-        <div className='card-group'>
-            {cards.map((card) => (
-            <Card className='border-0' key={card.id} style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={card.imageUrl} />
-                <Card.Body>
-                <Card.Title>{card.title}</Card.Title>
-                <Card.Text>{card.text}</Card.Text>
-                <Button variant="primary">{card.buttonLabel}</Button>
-                </Card.Body>
+      <Container>
+      <Row>
+        {data.map((item) => (
+          <Col md={4} key={item.id}>
+            <Card>
+              <Card.Img variant="top" src="https://cdn-icons-png.flaticon.com/512/1606/1606814.png" />
+              <Card.Body>
+                <Card.Title>{item.name}</Card.Title>
+                <Card.Text>{item.address}</Card.Text>
+                <Card.Text>{item.contact}</Card.Text>
+                <Button variant='primary'>Voir plus</Button>
+              </Card.Body>
             </Card>
-            ))}
-        </div>
+          </Col>
+        ))}
+      </Row>
+    </Container>
     
     );
   }
