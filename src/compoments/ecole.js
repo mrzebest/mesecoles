@@ -9,7 +9,7 @@ function Ecole() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-      axios.get('http://localhost:8090/ecole')
+      axios.get('http://localhost:8090/ecoles')
         .then(response => {
           setData(response.data);
           console.log(response.data)
