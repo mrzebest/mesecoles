@@ -1,4 +1,6 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +11,37 @@ import '../App.css';
 
 
 function AddClass() {
+  const { id } = useParams();
+  const [name, setName] = useState('');
+  const [level, setLevel] = useState('');
+  const [size, setSize] = useState('');
+  const [ecole_id, setEcoleId] = useState('');
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // empêche la page de se recharger
+    const data = {
+      name: name,
+      level: level,
+      size: size,
+      ecole_id: ecole_id
+    };
+
+    console.log(data)
+    axios.post('http://localhost:8090/classroms/'+id, JSON.stringify(data), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.replace("/");
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   
     return (
         
@@ -17,22 +50,22 @@ function AddClass() {
             <h1>Ajouter des classes</h1>
         </div>
         <div className="d-flex justify-content-center align-items-center form">
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className='formulaire-group' controlId="formName">
           <Form.Label>Nom</Form.Label>
-          <Form.Control type="text" placeholder="Entrez votre nom" />
+          <Form.Control name='name' type="text" placeholder="Entrez votre nom" value={name} onChange={(event) => setName(event.target.value)}  />
         </Form.Group>
 
         <Form.Group className='formulaire-group' controlId="formAddress">
           <Form.Label>Niveau</Form.Label>
-          <Form.Control type="text" placeholder="Entrez votre adresse" />
+          <Form.Control name='level' type="text" placeholder="Entrez votre adresse" value={level} onChange={(event) => setLevel(event.target.value)} />
         </Form.Group>
 
         <Form.Group className='formulaire-group'controlId="formContact">
           <Form.Label>Effectif</Form.Label>
-          <Form.Control type="text" placeholder="Entrez votre contact" />
+          <Form.Control name='size' type="text" placeholder="Entrez votre contact" value={size} onChange={(event) => setSize(event.target.value)} />
         </Form.Group>
-
+        <Form.Control name='ecole_id' type="hidden" placeholder="Entrez votre contact" value={ecole_id} onChange={(event) => setEcoleId(event.target.value)}/>
         <Button variant="primary" type="submit">
           Soumettre
         </Button>
