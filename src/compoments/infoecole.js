@@ -51,7 +51,7 @@ function InfoEcole() {
           </div>
         </div>
 
-        <ClassDisplay classrooms={data.classrooms}/> {/* Affichage des classes de l'école avec le composant ClassDisplay */}
+        <ClassDisplay ecoleId={data.id}/> {/* Affichage des classes de l'école avec le composant ClassDisplay */}
       </Row>
     </Container>
   );

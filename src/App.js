@@ -11,6 +11,7 @@ import InfoEcole from './compoments/infoecole';
 import AddClass from './compoments/addclass';
 import Ecole from './compoments/ecole';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import UpdateEcole from './compoments/updateecole';
 
 
 function App() {
