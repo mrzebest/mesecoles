@@ -45,7 +45,7 @@ function InfoEcole() {
               </div>
             </div>
             <div className='card-footer'>
-              <a className='btn btn-warning space' >Modifier</a> {/* Bouton de modification */}
+              <a className='btn btn-warning space' href={'/ecole/updateecole/'+data.id}>Modifier</a> {/* Bouton de modification */}
               <Button onClick={() => deleteEcole(data)} className='btn btn-danger space' >Supprimer</Button> {/* Bouton de suppression */}
             </div>
           </div>
