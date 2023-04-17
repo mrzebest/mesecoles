@@ -12,12 +12,10 @@ import '../App.css';
 // Déclaration du composant
 function ClassDisplay(props) {
 
-  const { id } = useParams();
 
-  console.log(id)
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8090/ecoles/'+1+ '/classrooms') // appel de l'API avec l'identifiant de l'école
+    axios.get('http://localhost:8090/ecoles/'+3+ '/classrooms') // appel de l'API avec l'identifiant de l'école
       .then(response => {
         setData(response.data); // mise à jour du state data avec les données de l'API
         console.log(response.data) // affichage des données dans la console

@@ -15,8 +15,6 @@ function Header() {
           <Nav className="mr-auto">
             <Nav.Link href="/">Accueil</Nav.Link>
             <Nav.Link href="/addecole">Ajouter une école</Nav.Link>
-            <Nav.Link href="/addclass">Ajouter une Classe</Nav.Link>
-
           </Nav>
         </Navbar.Collapse>
       </Container>
