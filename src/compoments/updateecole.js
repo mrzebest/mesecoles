@@ -21,6 +21,19 @@ function UpdateEcole() {
       address: address,
       contact: contact
     };
+    console.log(data)
+    axios.patch(`http://localhost:8090/ecoles/${id}`, JSON.stringify(data), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.replace("/");
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
@@ -43,7 +56,7 @@ function UpdateEcole() {
         <Form onSubmit={handleSubmit}>
           <Form.Group className='formulaire-group' controlId="formName">
             <Form.Label>Nom</Form.Label>
-            <Form.Control name='name' type="text" placeholder={`(${data.name})`} value={name} onChange={(event) => setName(event.target.value)} />
+            <Form.Control name='name' type="text" placeholder={`${data.name}`} value={name} onChange={(event) => setName(event.target.value)} />
           </Form.Group>
 
           <Form.Group className='formulaire-group' controlId="formAddress">
