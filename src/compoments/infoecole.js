@@ -20,6 +20,14 @@ function InfoEcole() {
         console.log(error); // gestion des erreurs éventuelles
       });
   }, []); // appel de l'API au chargement du composant
+  const deleteEcole = (data) => {
+    axios.delete(` http://localhost:8090/ecoles/${data.id}`).then(response => {
+      window.location.replace("/");
+    })
+    .catch(error => {
+      console.log(error); // gestion des erreurs éventuelles
+    });
+}
   
   return (
     <Container className='corps'> {/* Container principal de l'application */}
@@ -38,7 +46,7 @@ function InfoEcole() {
             </div>
             <div className='card-footer'>
               <a className='btn btn-warning space' >Modifier</a> {/* Bouton de modification */}
-              <a className='btn btn-danger space' >Supprimer</a> {/* Bouton de suppression */}
+              <Button onClick={() => deleteEcole(data)} className='btn btn-danger space' >Supprimer</Button> {/* Bouton de suppression */}
             </div>
           </div>
         </div>
