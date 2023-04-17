@@ -3,6 +3,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../App.css';
 
@@ -10,36 +11,28 @@ function UpdateEcole() {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [contact, setContact] = useState('');
+  const [data, setData] = useState([]);
+  const { id } = useParams();
 
   const handleSubmit = (event) => {
-    event.preventDefault(); // empêche la page de se recharger
+    event.preventDefault();
     const data = {
       name: name,
       address: address,
       contact: contact
     };
+  }
 
-    console.log(data)
-    axios.post('http://localhost:8090/ecoles', JSON.stringify(data), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+  useEffect(() => {
+    axios.get(`http://localhost:8090/ecoles/${id}`)
       .then(response => {
-        console.log(response);
-        window.location.replace("/");
+        setData(response.data);
+        console.log(response.data);
       })
       .catch(error => {
         console.log(error);
       });
-  }
-
-  useEffect(() => {
-    // Ici, vous pouvez effectuer d'autres opérations lorsqu'un champ de formulaire change, par exemple :
-    // if (name !== '') { ... }
-    // if (address !== '') { ... }
-    // if (contact !== '') { ... }
-  }, [name, address, contact]);
+  }, []);
 
   return (
     <Container className='corps'>
@@ -50,17 +43,17 @@ function UpdateEcole() {
         <Form onSubmit={handleSubmit}>
           <Form.Group className='formulaire-group' controlId="formName">
             <Form.Label>Nom</Form.Label>
-            <Form.Control name='name' type="text" placeholder="Entrez votre nom" value={name} onChange={(event) => setName(event.target.value)} />
+            <Form.Control name='name' type="text" placeholder={`(${data.name})`} value={name} onChange={(event) => setName(event.target.value)} />
           </Form.Group>
 
           <Form.Group className='formulaire-group' controlId="formAddress">
             <Form.Label>Adresse</Form.Label>
-            <Form.Control name='address' type="text" placeholder="Entrez votre adresse" value={address} onChange={(event) => setAddress(event.target.value)} />
+            <Form.Control name='address' type="text" placeholder={`(${data.address})`} value={address} onChange={(event) => setAddress(event.target.value)} />
           </Form.Group>
 
           <Form.Group className='formulaire-group' controlId="formContact">
             <Form.Label>Contact</Form.Label>
-            <Form.Control name='contact' type="text" placeholder="Entrez votre contact" value={contact} onChange={(event) => setContact(event.target.value)} />
+            <Form.Control name='contact' type="text" placeholder={` (${data.contact})`} value={contact} onChange={(event) => setContact(event.target.value)} />
           </Form.Group>
 
           <Button variant="primary" type="submit">
@@ -68,6 +61,7 @@ function UpdateEcole() {
           </Button>
         </Form>
       </div>
+
     </Container>
   );
 }
