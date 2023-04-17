@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 // Import des composants React
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import axios from 'axios'; // Importation d'axios pour la communication avec l'API
@@ -11,10 +12,12 @@ import '../App.css';
 // Déclaration du composant
 function ClassDisplay(props) {
 
-  const ecoleId = props.ecoleId
+  const { id } = useParams();
+
+  console.log(id)
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:8090/ecoles/'+props.ecoleId+ '/classrooms') // appel de l'API avec l'identifiant de l'école
+    axios.get(`http://localhost:8090/ecoles/${id}/classrooms`) // appel de l'API avec l'identifiant de l'école
       .then(response => {
         setData(response.data); // mise à jour du state data avec les données de l'API
         console.log(response.data) // affichage des données dans la console
