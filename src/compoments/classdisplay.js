@@ -1,6 +1,7 @@
+import React, { useState, useEffect } from 'react';
 // Import des composants React
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-
+import axios from 'axios'; // Importation d'axios pour la communication avec l'API
 // Import du style Bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -9,14 +10,20 @@ import '../App.css';
 
 // Déclaration du composant
 function ClassDisplay(props) {
-    // Vérification que `props.items` est bien un tableau
-    if (!Array.isArray(props.classrooms)) {
-        // Si ce n'est pas le cas, affichage d'un message d'erreur
-        return <div>Erreur : la propriété items doit être un tableau.</div>;
-      }
 
-    // Récupération des données à afficher
-    const data = props.classrooms;
+  const ecoleId = props.ecoleId
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:8090/ecoles/'+props.ecoleId+ '/classrooms') // appel de l'API avec l'identifiant de l'école
+      .then(response => {
+        setData(response.data); // mise à jour du state data avec les données de l'API
+        console.log(response.data) // affichage des données dans la console
+      })
+      .catch(error => {
+        console.log(error); // gestion des erreurs éventuelles
+      });
+  }, []);
+    // Vérification que `props.items` est bien un tableau
 
     // Affichage des données dans un tableau
     return (
@@ -34,7 +41,7 @@ function ClassDisplay(props) {
             </thead>
             <tbody>
               {/* Boucle pour afficher chaque élément du tableau */}
-              {props.classrooms.map((item) => (
+              {data.map((item) => (
                 <tr>
                   <th scope="row" key={item.id}>{item.id}</th>
                   <td>{item.name}</td>
