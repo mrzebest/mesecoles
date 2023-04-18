@@ -50,20 +50,20 @@ function AddEcole() {
         <Form onSubmit={handleSubmit}>
           <Form.Group className='formulaire-group' controlId="formName">
             <Form.Label>Nom</Form.Label>
-            <Form.Control name='name' type="text" placeholder="Entrez votre nom" value={name} onChange={(event) => setName(event.target.value)} />
+            <Form.Control name='name' type="text" placeholder="Entrez le nom " value={name} onChange={(event) => setName(event.target.value)} />
           </Form.Group>
 
           <Form.Group className='formulaire-group' controlId="formAddress">
             <Form.Label>Adresse</Form.Label>
-            <Form.Control name='address' type="text" placeholder="Entrez votre adresse" value={address} onChange={(event) => setAddress(event.target.value)} />
+            <Form.Control name='address' type="text" placeholder="Entrez l'adresse" value={address} onChange={(event) => setAddress(event.target.value)} />
           </Form.Group>
 
           <Form.Group className='formulaire-group' controlId="formContact">
             <Form.Label>Contact</Form.Label>
-            <Form.Control name='contact' type="text" placeholder="Entrez votre contact" value={contact} onChange={(event) => setContact(event.target.value)} />
+            <Form.Control name='contact' type="text" placeholder="Entrez le contact" value={contact} onChange={(event) => setContact(event.target.value)} />
           </Form.Group>
 
-          <Button variant="primary" type="submit">
+          <Button className="space" variant="outline-dark" type="submit">
             Soumettre
           </Button>
         </Form>

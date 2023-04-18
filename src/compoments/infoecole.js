@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css'; // import de la feuille de style de B
 import '../App.css'; // import de la feuille de style de l'application
 import ClassDisplay from './classdisplay'; // import du composant ClassDisplay
 import { useParams } from 'react-router-dom'; // import du hook useParams pour récupérer les paramètres de l'URL
+import imgSchool from '../assets/iconschool.jpg'; 
 
 function InfoEcole() {
   const [data, setData] = useState([]); // initialisation d'un state data avec un tableau vide pour stocker les données
@@ -55,7 +56,7 @@ function InfoEcole() {
         <div className="card mb-3 card-form col-sm-11"  key={data.id}>
           <div className="row no-gutters">
             <div className="col-md-4">
-              <img src="https://cdn-icons-png.flaticon.com/512/1606/1606814.png" class="card-img" alt="..."/> {/* Image de l'école */}
+              <img src={imgSchool} style={{width: '70%', margin:'auto'}} class="card-img" alt="..."/> {/* Image de l'école */}
             </div>
             <div className="col-md-8">
               <div className="card-body details">
@@ -65,9 +66,9 @@ function InfoEcole() {
               </div>
             </div>
             <div className='card-footer'>
-              <a className='btn btn-warning space' href={'/ecole/updateecole/'+data.id}>Modifier</a> {/* Bouton de modification */}
-              <Button onClick={() => deleteEcole(data)} className='btn btn-danger space' >Supprimer</Button> {/* Bouton de suppression */}
-              <a className='btn btn-success space' href={'/ecole/'+data.id+'/addclasse/'}>Ajoute une classe</a> {/* Bouton de modification */}
+              <a className='btn btn-outline-warning space' href={'/ecole/updateecole/'+data.id}>Modifier</a> {/* Bouton de modification */}
+              <Button onClick={() => deleteEcole(data)} className="space" variant="outline-danger"  >Supprimer</Button> {/* Bouton de suppression */}
+              <a className='btn btn-outline-success space' href={'/ecole/'+data.id+'/addclasse/'}>Ajoute une classe</a> {/* Bouton de modification */}
             </div>
           </div>
         </div>
@@ -93,8 +94,8 @@ function InfoEcole() {
                   <td>{item.level}</td>
                   <td>{item.size}</td>
                   <td>
-                    <a className='btn btn-warning space' >Modifier</a>
-                    <Button onClick={() => deleteClassromm(item)} className='btn btn-danger space' >Supprimer</Button> {/* Bouton de suppression */}
+                    <a className='btn btn-outline-warning space' >Modifier</a>
+                    <Button onClick={() => deleteClassromm(item)} className="space" variant="outline-danger"  >Supprimer</Button> {/* Bouton de suppression */}
                   </td>
                 </tr>
               ))}

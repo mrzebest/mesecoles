@@ -20,12 +20,12 @@ function AddClass() {
 
   const handleSubmit = (event) => {
     event.preventDefault(); // empêche la page de se recharger
-    const data = {
+    const data = [{
       name: name,
       level: level,
       size: size,
       ecole_id: ecole_id
-    };
+    }];
 
     console.log(data)
     axios.post('http://localhost:8090/classroms/'+id, JSON.stringify(data), {
@@ -35,7 +35,7 @@ function AddClass() {
     })
       .then(response => {
         console.log(response);
-        window.location.replace("/");
+        window.location.replace('/ecole/'+id);
       })
       .catch(error => {
         console.log(error);
@@ -66,7 +66,7 @@ function AddClass() {
           <Form.Control name='size' type="text" placeholder="Entrez votre contact" value={size} onChange={(event) => setSize(event.target.value)} />
         </Form.Group>
         <Form.Control name='ecole_id' type="hidden" placeholder="Entrez votre contact" value={ecole_id} onChange={(event) => setEcoleId(event.target.value)}/>
-        <Button variant="primary" type="submit">
+        <Button className="space" variant="outline-dark"  type="submit">
           Soumettre
         </Button>
       </Form>

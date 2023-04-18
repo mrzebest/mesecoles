@@ -27,6 +27,7 @@ function App() {
       <Route path="/ecole/:id" element={<InfoEcole/>} />
       <Route path="/ecole/:id/addclasse/" element={<AddClass/>} />
       <Route path="/ecole/updateecole/:id" element={<UpdateEcole/>} />
+  
     </Routes>
   </Router>
   </div>
